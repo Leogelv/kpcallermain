@@ -7,6 +7,7 @@ import { AudioVisualizer } from './AudioVisualizer';
 import { Message } from '../types/conversation';
 import { Inter_Tight, Unbounded } from 'next/font/google';
 import { ConversationControls } from './ConversationControls';
+import { motion } from 'framer-motion';
 
 const interTight = Inter_Tight({ subsets: ['latin'] });
 const unbounded = Unbounded({ subsets: ['latin'] });
@@ -141,21 +142,47 @@ export const Conversation = forwardRef<ConversationHandle, ConversationProps>(
         {/* Audio Visualizer */}
         <div className="relative mt-4 pb-2 px-4">
           <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-t from-white/50 to-transparent -z-10" />
-          <div className="flex flex-col items-center gap-4">
-            <div className="w-full max-w-[300px]">
-              <AudioVisualizer 
-                isListening={conversation.status === 'connected'} 
+          <div className="flex flex-row items-center justify-between gap-4 h-full">
+            <div className="flex flex-col gap-4">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={startCall}
+                className={`px-6 py-3 rounded-xl font-medium text-sm
+                  bg-gradient-to-r from-blue-600 to-violet-600 text-white
+                  shadow-lg shadow-blue-600/20 hover:shadow-xl hover:shadow-blue-600/30
+                  transition-all duration-300 ${unbounded.className}
+                  flex items-center justify-center gap-2`}
+                disabled={conversation.status === 'connected'}
+              >
+                <span className="text-xl">📞</span>
+                Начать звонок
+              </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={endCall}
+                className={`px-6 py-3 rounded-xl font-medium text-sm
+                  bg-gradient-to-r from-red-600 to-pink-600 text-white
+                  shadow-lg shadow-red-600/20 hover:shadow-xl hover:shadow-red-600/30
+                  transition-all duration-300 ${unbounded.className}
+                  flex items-center justify-center gap-2`}
+                disabled={conversation.status !== 'connected'}
+              >
+                <span className="text-xl">📵</span>
+                Положить трубку
+              </motion.button>
+            </div>
+
+            <div className="flex-1">
+              <AudioVisualizer
+                isListening={conversation.status === 'connected'}
                 isSpeaking={conversation.isSpeaking}
                 microphoneStream={microphoneStream}
                 conversation={conversation}
               />
             </div>
-            <ConversationControls
-              onStart={startCall}
-              onStop={endCall}
-              isConnected={conversation.status === 'connected'}
-              unboundedFont={unbounded.className}
-            />
           </div>
         </div>
         

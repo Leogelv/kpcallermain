@@ -138,9 +138,9 @@ export function AudioVisualizer({
       </div>
       <canvas
         ref={canvasRef}
-        width={300}
-        height={300}
-        className="w-full h-full max-w-[300px] max-h-[300px]"
+        width={200}
+        height={200}
+        className="w-full h-full max-w-[200px] max-h-[200px]"
       />
     </div>
   );

@@ -333,7 +333,7 @@ export function Conversation() {
       setMicrophoneStream(micStream);
       
       const options: ConversationOptions = {
-        agentId: '5MXOKiURgOvOvsm4BvL3',
+        agentId: 'L4UiKqUnC0r0rAux78FQ',
         audioStream: micStream
       };
       

@@ -33,7 +33,7 @@ export default function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="w-full min-h-[90vh] max-w-[1400px] rounded-[2rem] 
+        className="w-full min-h-[80vh] max-w-[1200px] rounded-[1.5rem] 
           bg-white/40 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]
           border border-white/50 overflow-hidden"
       >
@@ -96,7 +96,7 @@ export default function HeroSection() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.7 }}
-                className="relative w-full aspect-video mb-6 group"
+                className="relative w-full aspect-square max-w-[400px] mx-auto mb-6 group"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-violet-600/20 
                   rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -183,7 +183,7 @@ const keyPoints = [
     description: "Умная система анализирует и обрабатывает каждый звонок индивидуально"
   },
   {
-    title: "Экономия ресурсов и времени",
+    title: "Экономия ресурсов и времен��",
     description: "Сокращение затрат на обработку звонков до 70%"
   },
   {
