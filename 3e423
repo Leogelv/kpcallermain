@@ -1,0 +1,126 @@
+'use client';
+
+import { useConversation } from '@11labs/react';
+import { useCallback, useState } from 'react';
+
+interface Message {
+  text: string;
+  sender: string;
+  timestamp: Date;
+}
+
+interface IncomingMessage {
+  message?: string;
+  text?: string;
+  role?: string;
+  source?: string;
+}
+
+export function Conversation() {
+  const [messages, setMessages] = useState<Message[]>([]);
+  
+  const conversation = useConversation({
+    onConnect: () => console.log('Connected'),
+    onDisconnect: () => console.log('Disconnected'),
+    onMessage: (message: IncomingMessage) => {
+      console.log('Received message:', message);
+      setMessages(prev => [...prev, {
+        text: message.message || message.text || '',
+        sender: message.role || message.source || 'agent',
+        timestamp: new Date()
+      }]);
+    },
+    onError: (error) => console.error('Error:', error),
+  });
+
+  const startConversation = useCallback(async () => {
+    try {
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+      await conversation.startSession({
+        agentId: '5MXOKiURgOvOvsm4BvL3',
+      });
+    } catch (error) {
+      console.error('Failed to start conversation:', error);
+    }
+  }, [conversation]);
+
+  const stopConversation = useCallback(async () => {
+    await conversation.endSession();
+  }, [conversation]);
+
+  return (
+    <div className="flex flex-col items-center gap-8 w-full max-w-4xl mx-auto">
+      <div className="flex gap-6">
+        <button
+          onClick={startConversation}
+          disabled={conversation.status === 'connected'}
+          className="group relative px-8 py-4 bg-gradient-to-r from-[#FF3BFF] to-[#5C24FF] rounded-2xl
+          transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:hover:scale-100
+          hover:shadow-[0_0_30px_rgba(92,36,255,0.5)] disabled:hover:shadow-none overflow-hidden"
+        >
+          <span className="absolute inset-0 bg-gradient-to-r from-[#FF3BFF] to-[#5C24FF] opacity-0 
+            group-hover:opacity-30 transition-opacity duration-300 animate-pulse"></span>
+          <span className="relative flex items-center gap-2 text-white font-medium">
+            <span className="text-xl group-hover:rotate-12 transition-transform duration-300">🎙️</span>
+            Start Chat
+          </span>
+        </button>
+        
+        <button
+          onClick={stopConversation}
+          disabled={conversation.status !== 'connected'}
+          className="group relative px-8 py-4 bg-gradient-to-r from-[#FF3B3B] to-[#FF3BFF] rounded-2xl
+          transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:hover:scale-100
+          hover:shadow-[0_0_30px_rgba(255,59,255,0.5)] disabled:hover:shadow-none overflow-hidden"
+        >
+          <span className="absolute inset-0 bg-gradient-to-r from-[#FF3B3B] to-[#FF3BFF] opacity-0 
+            group-hover:opacity-30 transition-opacity duration-300 animate-pulse"></span>
+          <span className="relative flex items-center gap-2 text-white font-medium">
+            <span className="text-xl group-hover:rotate-12 transition-transform duration-300">⏹️</span>
+            Stop Chat
+          </span>
+        </button>
+      </div>
+
+      <div className="flex gap-4 items-center mb-6 text-white/90 backdrop-blur-md bg-white/5 p-6 rounded-2xl
+        border border-white/10 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+        <div className="flex items-center gap-3">
+          <span className="text-2xl animate-pulse">⚡</span>
+          <span className="font-medium">Status: {conversation.status}</span>
+        </div>
+        <div className="w-px h-6 bg-white/20"></div>
+        <div className="flex items-center gap-3">
+          <span className="text-2xl animate-bounce">
+            {conversation.isSpeaking ? '🗣️' : '👂'}
+          </span>
+          <span className="font-medium">
+            Agent is {conversation.isSpeaking ? 'speaking' : 'listening'}
+          </span>
+        </div>
+      </div>
+
+      <div className="w-full h-[100%]  overflow-y-auto p-6 
+        scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
+        {messages.map((message, index) => (
+          <div
+            key={index}
+            className={`mb-6 p-5 rounded-2xl backdrop-blur-sm transition-all duration-300 animate-slideIn
+              ${message.sender === 'user' 
+                ? 'bg-gradient-to-r from-[#FF3BFF]/20 to-[#5C24FF]/20 ml-auto' 
+                : 'bg-gradient-to-r from-[#5C24FF]/20 to-[#FF3BFF]/20 mr-auto'
+              } max-w-[80%] border border-white/10`}
+          >
+            <div className="flex items-center gap-2 font-medium mb-3 text-white">
+              {message.sender === 'human' || message.sender === 'user' ? '👤 You' : '🤖 ЛеонИИд'}
+            </div>
+            <div className="text-white/90 leading-relaxed">{message.text}</div>
+            <div className="text-xs text-white/50 mt-3 flex items-center gap-2">
+              <span>🕒</span>
+              {message.timestamp.toLocaleTimeString()}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+} 
