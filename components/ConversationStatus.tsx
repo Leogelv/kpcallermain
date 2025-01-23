@@ -18,7 +18,7 @@ export function ConversationStatus({ status, isSpeaking }: ConversationStatusPro
           {isSpeaking ? '🗣️' : '👂'}
         </span>
         <span className="font-medium text-sm sm:text-base">
-          Agent is {isSpeaking ? 'speaking' : 'listening'}
+          AI {isSpeaking ? 'is speaking' : 'is listening'}
         </span>
       </div>
     </div>
