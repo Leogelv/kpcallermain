@@ -6,7 +6,7 @@ import { ConversationStatus } from '../../components/ConversationStatus';
 import { ConversationControls } from '../../components/ConversationControls';
 import { unbounded } from '../fonts';
 
-export default function EnglishPage() {
+export default function RussianPage() {
   const [isConnected, setIsConnected] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [microphoneStream, setMicrophoneStream] = useState<MediaStream | null>(null);
@@ -52,7 +52,7 @@ export default function EnglishPage() {
       setMicrophoneStream(micStream);
       
       await conversation.startSession({
-        agentId: '1K2o3CMuTKFH0JcQiNbN'
+        agentId: 'J3aWQroRjMTAhd943wyt'
       });
     } catch (error) {
       console.error('Failed to start conversation:', error);
@@ -77,15 +77,15 @@ export default function EnglishPage() {
         <div className="text-center space-y-4">
           <h1 className={`text-4xl sm:text-5xl font-bold bg-clip-text text-transparent 
             bg-gradient-to-r from-blue-500 to-violet-500 ${unbounded.className}`}>
-            AI-Powered Real Estate Caller
+            AI-Звонильщик для Недвижимости
           </h1>
           <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto">
-            Experience the future of real estate communication with our intelligent calling assistant
+            Испытайте будущее коммуникаций в сфере недвижимости с нашим умным ассистентом для звонков
           </p>
         </div>
 
         <ConversationStatus 
-          status={isConnected ? "Connected" : "Ready to connect"} 
+          status={isConnected ? "Подключено" : "Готов к подключению"} 
           isSpeaking={isSpeaking} 
         />
 
