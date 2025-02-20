@@ -82,6 +82,19 @@ export default function RussianPage() {
           <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto">
             Испытайте будущее коммуникаций с нашим умным голосовым ассистентом
           </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-4 text-sm sm:text-base text-gray-400">
+            <span className="flex items-center gap-2">
+              <span className="text-blue-500">⚡</span> Интеграция с IP-телефонией
+            </span>
+            <span className="hidden sm:block text-gray-600">•</span>
+            <span className="flex items-center gap-2">
+              <span className="text-violet-500">🔍</span> Умный поиск и сбор данных
+            </span>
+            <span className="hidden sm:block text-gray-600">•</span>
+            <span className="flex items-center gap-2">
+              <span className="text-blue-500">🤖</span> Расширенные возможности AI
+            </span>
+          </div>
         </div>
 
         <ConversationStatus 

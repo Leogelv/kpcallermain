@@ -82,6 +82,19 @@ export default function EnglishPage() {
           <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto">
             Experience the future of communication with our intelligent voice assistant
           </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-4 text-sm sm:text-base text-gray-400">
+            <span className="flex items-center gap-2">
+              <span className="text-blue-500">⚡</span> IP Telephony Integration
+            </span>
+            <span className="hidden sm:block text-gray-600">•</span>
+            <span className="flex items-center gap-2">
+              <span className="text-violet-500">🔍</span> Smart Search & Data Collection
+            </span>
+            <span className="hidden sm:block text-gray-600">•</span>
+            <span className="flex items-center gap-2">
+              <span className="text-blue-500">🤖</span> Advanced AI Agent Capabilities
+            </span>
+          </div>
         </div>
 
         <ConversationStatus 
