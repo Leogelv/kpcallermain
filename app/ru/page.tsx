@@ -77,10 +77,10 @@ export default function RussianPage() {
         <div className="text-center space-y-4">
           <h1 className={`text-4xl sm:text-5xl font-bold bg-clip-text text-transparent 
             bg-gradient-to-r from-blue-500 to-violet-500 ${unbounded.className}`}>
-            AI-Звонильщик для Недвижимости
+            AI Голосовой Ассистент
           </h1>
           <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto">
-            Испытайте будущее коммуникаций в сфере недвижимости с нашим умным ассистентом для звонков
+            Испытайте будущее коммуникаций с нашим умным голосовым ассистентом
           </p>
         </div>
 

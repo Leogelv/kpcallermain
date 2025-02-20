@@ -77,10 +77,10 @@ export default function EnglishPage() {
         <div className="text-center space-y-4">
           <h1 className={`text-4xl sm:text-5xl font-bold bg-clip-text text-transparent 
             bg-gradient-to-r from-blue-500 to-violet-500 ${unbounded.className}`}>
-            AI-Powered Real Estate Caller
+            AI Voice Assistant
           </h1>
           <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto">
-            Experience the future of real estate communication with our intelligent calling assistant
+            Experience the future of communication with our intelligent voice assistant
           </p>
         </div>
 
