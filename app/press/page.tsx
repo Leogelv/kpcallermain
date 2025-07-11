@@ -6,10 +6,17 @@ import { ConversationStatus } from '../../components/ConversationStatus';
 import { ConversationControls } from '../../components/ConversationControls';
 import { unbounded } from '../fonts';
 
+interface Message {
+  text: string;
+  source: 'user' | 'agent';
+  timestamp: Date;
+}
+
 export default function PressPage() {
   const [isConnected, setIsConnected] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [microphoneStream, setMicrophoneStream] = useState<MediaStream | null>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const conversation = useConversation({
@@ -22,6 +29,14 @@ export default function PressPage() {
       setIsConnected(false);
       setIsSpeaking(false);
       setMicrophoneStream(null);
+    },
+    onMessage: (message: any) => {
+      console.log('Message received:', message);
+      setMessages(prev => [...prev, {
+        text: message.message || message.text || '',
+        source: (message.source || message.role || 'agent') as 'user' | 'agent',
+        timestamp: new Date()
+      }]);
     },
     onError: (error: string) => {
       console.error('Error:', error);
@@ -50,9 +65,10 @@ export default function PressPage() {
       });
       
       setMicrophoneStream(micStream);
+      setMessages([]);
       
       await conversation.startSession({
-        agentId: 'J3aWQroRjMTAhd943wyt'
+        agentId: 'agent_01jzw8s6czf1zbqzy986tsygq2'
       });
     } catch (error) {
       console.error('Failed to start conversation:', error);
@@ -108,6 +124,32 @@ export default function PressPage() {
           isConnected={isConnected}
           unboundedFont={unbounded.className}
         />
+
+        {/* Messages List */}
+        {messages.length > 0 && (
+          <div className="w-full max-w-2xl bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+            <h3 className="text-lg font-semibold mb-4 text-center">Лента сообщений</h3>
+            <div className="space-y-4 max-h-96 overflow-y-auto">
+              {messages.map((message, index) => (
+                <div key={index} className={`flex ${message.source === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  <div className={`max-w-[80%] p-3 rounded-lg ${
+                    message.source === 'user' 
+                      ? 'bg-blue-600 text-white ml-4' 
+                      : 'bg-gray-700 text-gray-100 mr-4'
+                  }`}>
+                    <div className="text-sm">{message.text}</div>
+                    <div className="text-xs opacity-70 mt-1">
+                      {message.timestamp.toLocaleTimeString('ru-RU', { 
+                        hour: '2-digit', 
+                        minute: '2-digit' 
+                      })}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <audio ref={audioRef} autoPlay playsInline className="hidden" />
       </div>
