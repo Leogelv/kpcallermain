@@ -6,7 +6,7 @@ import { ConversationStatus } from '../../components/ConversationStatus';
 import { ConversationControls } from '../../components/ConversationControls';
 import { unbounded } from '../fonts';
 
-export default function EnglishPage() {
+export default function PressPage() {
   const [isConnected, setIsConnected] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [microphoneStream, setMicrophoneStream] = useState<MediaStream | null>(null);
@@ -52,7 +52,7 @@ export default function EnglishPage() {
       setMicrophoneStream(micStream);
       
       await conversation.startSession({
-        agentId: 'agent_01jzw8s6czf1zbqzy986tsygq2'
+        agentId: 'J3aWQroRjMTAhd943wyt'
       });
     } catch (error) {
       console.error('Failed to start conversation:', error);
@@ -77,28 +77,28 @@ export default function EnglishPage() {
         <div className="text-center space-y-4">
           <h1 className={`text-4xl sm:text-5xl font-bold bg-clip-text text-transparent 
             bg-gradient-to-r from-blue-500 to-violet-500 ${unbounded.className}`}>
-            AI Voice Assistant
+            ИИ Пресс-атташе МЭ РК
           </h1>
           <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto">
-            Experience the future of communication with our intelligent voice assistant
+            Официальный ИИ-представитель Министерства энергетики Республики Казахстан
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-4 text-sm sm:text-base text-gray-400">
             <span className="flex items-center gap-2">
-              <span className="text-blue-500">⚡</span> IP Telephony Integration
+              <span className="text-blue-500">📢</span> Официальные заявления
             </span>
             <span className="hidden sm:block text-gray-600">•</span>
             <span className="flex items-center gap-2">
-              <span className="text-violet-500">🔍</span> Smart Search & Data Collection
+              <span className="text-violet-500">📊</span> Актуальная статистика ТЭК
             </span>
             <span className="hidden sm:block text-gray-600">•</span>
             <span className="flex items-center gap-2">
-              <span className="text-blue-500">🤖</span> Advanced AI Agent Capabilities
+              <span className="text-blue-500">🏛️</span> Проверенная информация
             </span>
           </div>
         </div>
 
         <ConversationStatus 
-          status={isConnected ? "Connected" : "Ready to connect"} 
+          status={isConnected ? "Подключено" : "Готов к подключению"} 
           isSpeaking={isSpeaking} 
         />
 

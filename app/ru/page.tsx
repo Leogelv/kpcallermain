@@ -52,7 +52,7 @@ export default function RussianPage() {
       setMicrophoneStream(micStream);
       
       await conversation.startSession({
-        agentId: 'J3aWQroRjMTAhd943wyt'
+        agentId: 'agent_01jzw8s6czf1zbqzy986tsygq2'
       });
     } catch (error) {
       console.error('Failed to start conversation:', error);

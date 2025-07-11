@@ -85,7 +85,7 @@ export const Conversation = forwardRef<ConversationHandle, ConversationProps>(
         
         console.log('Starting conversation session...');
         await conversation.startSession({
-          agentId: '5MXOKiURgOvOvsm4BvL3',
+          agentId: 'agent_01jzw8s6czf1zbqzy986tsygq2',
         }).catch(err => {
           console.error('Session start error:', err);
           throw err;
