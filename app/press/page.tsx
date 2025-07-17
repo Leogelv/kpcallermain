@@ -38,16 +38,8 @@ export default function PressPage() {
       
       document.head.appendChild(script);
       setDidScriptLoaded(true);
-
-      return () => {
-        // Очищаем скрипт при размонтировании
-        const existingScript = document.head.querySelector('script[src="https://agent.d-id.com/v2/index.js"]');
-        if (existingScript) {
-          document.head.removeChild(existingScript);
-        }
-      };
     }
-  }, [activeTab, didScriptLoaded]);
+  }, [activeTab]);
 
   const conversation = useConversation({
     onConnect: () => {
@@ -224,7 +216,7 @@ export default function PressPage() {
 
         {/* Контент ИИ-аватара */}
         {activeTab === 'avatar' && (
-          <div className="w-full max-w-2xl">
+          <div className="w-full max-w-6xl">
             <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
               <h3 className="text-lg font-semibold mb-4 text-center">ИИ-аватар пресс-секретаря</h3>
               <div className="text-center text-gray-300 mb-4">
@@ -234,17 +226,12 @@ export default function PressPage() {
               {/* Контейнер для D-ID аватара */}
               <div 
                 id="did-agent-container" 
-                className="w-full h-96 bg-gray-800 rounded-lg flex items-center justify-center border-2 border-gray-600"
+                className="w-full h-[600px] bg-gray-900 rounded-lg border-2 border-gray-600"
               >
-                {!didScriptLoaded ? (
-                  <div className="text-gray-400">Загрузка ИИ-аватара...</div>
-                ) : (
-                  <div className="text-gray-400">ИИ-аватар готов к работе</div>
-                )}
               </div>
               
               <div className="mt-4 text-center text-sm text-gray-400">
-                Нажмите на аватар для начала беседы
+                ИИ-аватар загружается автоматически
               </div>
             </div>
           </div>
