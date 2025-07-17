@@ -218,10 +218,7 @@ export default function PressPage() {
         {activeTab === 'avatar' && (
           <div className="w-full max-w-6xl">
             <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-              <h3 className="text-lg font-semibold mb-4 text-center">ИИ-аватар пресс-секретаря</h3>
-              <div className="text-center text-gray-300 mb-4">
-                Интерактивный визуальный помощник для официального общения
-              </div>
+              <h3 className="text-lg font-semibold mb-4 text-center">ИИ-аватар Министерства Энергетики РК</h3>
               
               {/* Контейнер для D-ID аватара */}
               <div 
